@@ -44,7 +44,6 @@ class BrowserImage extends Image
   _initCanvas: ->
     @canvas = document.createElement('canvas')
     @context = @canvas.getContext('2d')
-    document.body.appendChild @canvas
     @width = @canvas.width = @img.width
     @height = @canvas.height = @img.height
     @context.drawImage @img, 0, 0, @width, @height
