@@ -19,13 +19,14 @@ class BrowserImage extends Image
   constructor: (path, cb) ->
     if typeof path == 'object' and path instanceof HTMLImageElement
       @img = path
+      if not isRelativeUrl(path) && not isSameOrigin(window.location.href, path)
+        @img.crossOrigin = 'anonymous'
       path = @img.src
     else
       @img = document.createElement('img')
+      if not isRelativeUrl(path) && not isSameOrigin(window.location.href, path)
+        @img.crossOrigin = 'anonymous'
       @img.src = path
-
-    if not isRelativeUrl(path) && not isSameOrigin(window.location.href, path)
-      @img.crossOrigin = 'anonymous'
 
     @img.onload = =>
       @_initCanvas()
