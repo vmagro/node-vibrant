@@ -74,7 +74,7 @@ Make a `Builder` for an image. Returns a `Builder` instance.
 
 Name    | Type                               | Description
 ------- | ---------------------------------- | ---------------------------------------
-`image` | `string` or `Buffer`(node.js only) | Path to image file (support HTTP/HTTPs)
+`image` | `string`, `HTMLImageElement`(browser only), or `Buffer`(node.js only) | Path to image file (support HTTP/HTTPs)
 
 #### `constructor(image, opts)`
 
@@ -93,7 +93,7 @@ Field          | Default                         | Description
 `maxDimension` | `undefined`                     | The max size of the image's longer side used in downsampling stage. This field will override `quality`.
 `filters`      | `[]`                            | An array of filters
 `Image`        | `Image.Node` or `Image.Browser` | An `Image` implementation class
-`Quantizer`    | `Vibrant.Quantizer.NoCopy`      | A `Quantizer` implementation class
+`Quantizer`    | `Vibrant.Quantizer.MMCQ`      | A `Quantizer` implementation class
 
 #### `getPalette(cb)`
 
@@ -115,7 +115,7 @@ Alias of `getPalette`.
 Helper class for change configurations and create a `Vibrant` instance. Methods of a `Builder` instance can be chained like:
 
 ```coffee
-Vibrant.form(src)
+Vibrant.from(src)
   .quality(1)
   .clearFilters()
   # ...
@@ -232,13 +232,7 @@ Keeps the original `vibrant.js`'s filtering behavior as reference.
 Base class of a `Quantizer`.
 
 #### `Quantizer.MMCQ`
-Default quantizer. ~4x faster than baseline quantizer. (Rewritten version of `NoCopy`)
-
-#### `Quantizer.NoCopy`
-Optimized quantizer. ~4x faster than baseline quantizer.
-
-#### `Quantizer.Baseline`
-Original `vibrant.js` quantizer. Used for tests and benchmarks only. It does not support downsampling nor filters.
+Default quantizer. ~4x faster than baseline quantizer.
 
 ### `Vibrant.Generator`
 Base class for `Generator`.
