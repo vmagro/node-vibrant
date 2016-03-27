@@ -74,4 +74,4 @@ class BrowserImage extends Image
     @context.getImageData 0, 0, @width, @height
 
   removeCanvas: ->
-    @canvas.parentNode.removeChild @canvas
+    @canvas = null
